@@ -3,3 +3,10 @@
   align-self: center;
   margin-top: 1rem;
 }
+
+.hr {
+  margin-top: 4rem;
+  border: 0;
+  height: 1px;
+  background: #e0e6ed;
+}

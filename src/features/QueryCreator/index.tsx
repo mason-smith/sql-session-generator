@@ -17,6 +17,7 @@ export const QueryCreator = () => {
         return <QueryRow key={cuid()} query={query} />;
       })}
       <QueryBuilder />
+      <hr className={styles.hr} />
     </div>
   );
 };
