@@ -9,7 +9,7 @@ import {
  * Input
  */
 export interface InputProps {
-  placeholder: string;
+  placeholder?: string | undefined;
   value: string;
   type: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;

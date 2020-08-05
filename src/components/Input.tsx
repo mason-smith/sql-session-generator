@@ -7,7 +7,7 @@ export const Input: FC<InputProps> = (props) => {
   const { placeholder, value, type, onChange } = props;
   return (
     <input
-      placeholder={placeholder}
+      placeholder={placeholder || undefined}
       type={type || 'text'}
       value={value}
       onChange={onChange}
