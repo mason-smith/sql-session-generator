@@ -28,4 +28,5 @@ export const defaultState = {
   predicate: { value: 'Domain', type: 'text', placeholder: 'website.com' },
   operator: { value: 'equals', type: 'text' },
   parameter: '',
+  parameterAlt: '',
 };

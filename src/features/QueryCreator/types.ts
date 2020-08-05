@@ -9,4 +9,5 @@ export type QueryType = {
   predicate: SelectInterface;
   operator: SelectInterface;
   parameter: string;
+  parameterAlt: string;
 };

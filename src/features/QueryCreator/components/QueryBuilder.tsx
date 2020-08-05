@@ -14,6 +14,7 @@ export const QueryBuilder = () => {
   const [predicate, setPredicate] = useState(defaultState.predicate);
   const [operator, setOperator] = useState(defaultState.operator);
   const [parameter, setParameter] = useState(defaultState.parameter);
+  const [parameterAlt, setParameterAlt] = useState(defaultState.parameterAlt);
 
   const setQueryListState = useSetRecoilState(queryListState);
 
@@ -25,17 +26,20 @@ export const QueryBuilder = () => {
         predicate,
         operator,
         parameter,
+        parameterAlt,
       },
     ]);
     setPredicate(defaultState.predicate);
     setOperator(defaultState.operator);
     setParameter(defaultState.parameter);
+    setParameterAlt(defaultState.parameter);
   };
 
   const resetQuery = () => {
     setPredicate(defaultState.predicate);
     setOperator(defaultState.operator);
     setParameter(defaultState.parameter);
+    setParameterAlt(defaultState.parameter);
   };
 
   return (
@@ -54,6 +58,7 @@ export const QueryBuilder = () => {
             )
           }
         />
+        {operator.value === 'between' ? <p>is</p> : null}
         <Select
           options={operatorFields.filter((operator) => {
             return operator.type === predicate.type;
@@ -69,9 +74,22 @@ export const QueryBuilder = () => {
         <Input
           placeholder={predicate.placeholder}
           value={parameter}
-          type={predicate.type}
+          // type={predicate.type}
+          type="string"
           onChange={(e) => setParameter(e.target.value)}
         />
+        {operator.value === 'between' ? (
+          <>
+            <p>and</p>
+            <Input
+              placeholder={predicate.placeholder}
+              value={parameterAlt}
+              // type={predicate.type}
+              type="string"
+              onChange={(e) => setParameterAlt(e.target.value)}
+            />
+          </>
+        ) : null}
       </div>
       <Button type="submit" disabled={false} onClick={() => createQuery()}>
         And
