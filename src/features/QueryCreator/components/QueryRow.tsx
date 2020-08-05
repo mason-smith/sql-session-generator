@@ -1,18 +1,19 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
+import { useRecoilState } from 'recoil';
 
 // Local Dependencies
+import styles from './QueryRow.module.css';
 import { FieldProps } from './types';
 import { Select } from 'components/Select';
 import { predicateFields, operatorFields } from 'data';
 import { Input } from 'components/Input';
 import { QueryType } from '../types';
-import { useRecoilState } from 'recoil';
 import { queryListState } from '../atoms';
-import { replaceItemAtIndex } from '../utils';
+import { replaceItemAtIndex, removeItemAtIndex } from '../utils';
 
 export const QueryRow: FC<FieldProps> = (props) => {
   const { query } = props;
-  const [parameter, setParameter] = useState(query.parameter);
+
   const [queryList, setQueryListState] = useRecoilState(queryListState);
 
   const index = queryList.findIndex((listItem) => listItem.id === query.id);
@@ -25,17 +26,25 @@ export const QueryRow: FC<FieldProps> = (props) => {
     setQueryListState(newList);
   };
 
-  const editQueryValue = (value: string) => {
-    setParameter(value);
+  const editParameter = (value: string) => {
     const newList = replaceItemAtIndex(queryList, index, {
       ...query,
       parameter: value,
     });
+
+    setQueryListState(newList);
+  };
+
+  const deleteQuery = () => {
+    const newList = removeItemAtIndex(queryList, index);
     setQueryListState(newList);
   };
 
   return (
-    <>
+    <div className={styles.row}>
+      <button className={styles.rowButton} onClick={() => deleteQuery()}>
+        X
+      </button>
       <Select
         options={predicateFields}
         value={query.predicate.value}
@@ -62,10 +71,10 @@ export const QueryRow: FC<FieldProps> = (props) => {
       />
       <Input
         placeholder={query.predicate.placeholder || ''}
-        value={parameter}
+        value={query.parameter}
         type={query.predicate.type}
-        onChange={(e) => editQueryValue(e.target.value)}
+        onChange={(e) => editParameter(e.target.value)}
       />
-    </>
+    </div>
   );
 };
