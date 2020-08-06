@@ -67,7 +67,7 @@ export const QueryRow: FC<FieldProps> = (props) => {
         placeholder={query.predicate.placeholder || ''}
         value={query.parameter}
         // type={query.predicate.type}
-        type="string"
+        type="text"
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           editField(e.target.value, 'parameter')
         }
@@ -79,7 +79,7 @@ export const QueryRow: FC<FieldProps> = (props) => {
             placeholder={query.predicate.placeholder}
             value={query.parameterAlt}
             // type={predicate.type}
-            type="string"
+            type="text"
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               editField(e.target.value, 'parameterAlt')
             }

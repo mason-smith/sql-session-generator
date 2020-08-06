@@ -77,7 +77,7 @@ export const QueryBuilder = () => {
           placeholder={predicate.placeholder}
           value={parameter}
           // type={predicate.type}
-          type="string"
+          type="text"
           onChange={(e) => setParameter(e.target.value)}
         />
         {operator.value === 'between' ? (
@@ -87,7 +87,7 @@ export const QueryBuilder = () => {
               placeholder={predicate.placeholder}
               value={parameterAlt}
               // type={predicate.type}
-              type="string"
+              type="text"
               onChange={(e) => setParameterAlt(e.target.value)}
             />
           </>

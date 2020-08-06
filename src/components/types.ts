@@ -13,6 +13,7 @@ export interface InputProps {
   value: string;
   type: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: any) => void;
 }
 
 /**

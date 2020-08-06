@@ -20,7 +20,7 @@ export const formatQuery = (
 ) => {
   switch (value) {
     case 'equals':
-      return `${operator} ${parameter}`;
+      return `${operator} '${parameter}'`;
     case 'contains':
       return `${operator} '%${parameter}%'`;
     case 'starts with':
