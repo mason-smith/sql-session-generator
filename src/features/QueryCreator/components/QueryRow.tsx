@@ -4,21 +4,19 @@ import { useRecoilState } from 'recoil';
 // Local Dependencies
 import styles from './QueryRow.module.css';
 import { FieldProps } from './types';
-import { Select } from 'components/Select';
-import { predicateFields, operatorFields } from 'data';
-import { Input } from 'components/Input';
-import { QueryType } from '../types';
 import { queryListState } from '../atoms';
 import { replaceItemAtIndex, removeItemAtIndex } from '../utils';
+import { Input } from 'components/Input';
+import { Select } from 'components/Select';
+import { predicateFields, operatorFields } from 'data';
+import { SelectInterface } from '../types';
 
 export const QueryRow: FC<FieldProps> = (props) => {
   const { query } = props;
-
   const [queryList, setQueryListState] = useRecoilState(queryListState);
+  const index = queryList.findIndex((listItem) => listItem === query);
 
-  const index = queryList.findIndex((listItem) => listItem.id === query.id);
-
-  const editField = (value: QueryType | string, option: string) => {
+  const editField = (value: SelectInterface | string, option: string) => {
     const newList = replaceItemAtIndex(queryList, index, {
       ...query,
       [option]: value,
@@ -39,10 +37,11 @@ export const QueryRow: FC<FieldProps> = (props) => {
       <Select
         options={predicateFields}
         value={query.predicate.value}
-        onChange={(e) =>
+        onChange={(e: ChangeEvent<HTMLSelectElement>) =>
           editField(
-            // @ts-ignore
-            predicateFields.find((field) => field.value === e.target.value),
+            predicateFields.find(
+              (field) => field.value === e.target.value
+            ) as SelectInterface,
             'predicate'
           )
         }
@@ -55,19 +54,18 @@ export const QueryRow: FC<FieldProps> = (props) => {
           return operator.type === query.predicate.type;
         })}
         value={query.operator.value}
-        onChange={(e) =>
+        onChange={(e: ChangeEvent<HTMLSelectElement>) =>
           editField(
-            // @ts-ignore
-            operatorFields.find((field) => field.value === e.target.value),
+            operatorFields.find(
+              (field) => field.value === e.target.value
+            ) as SelectInterface,
             'operator'
           )
         }
       />
       <Input
-        placeholder={query.predicate.placeholder || ''}
-        value={query.parameter}
-        // type={query.predicate.type}
         type="text"
+        value={query.parameter}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           editField(e.target.value, 'parameter')
         }

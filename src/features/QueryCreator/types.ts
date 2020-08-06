@@ -13,3 +13,16 @@ export type QueryType = {
   parameter: string;
   parameterAlt: string;
 };
+
+export interface OperatorInterface {
+  value: string;
+  symbol: string;
+  type: string;
+}
+
+export interface PredicateInterface {
+  value: string;
+  field: string;
+  type: string;
+  placeholder: string;
+}

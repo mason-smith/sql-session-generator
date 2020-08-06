@@ -3,10 +3,10 @@ import { useRecoilValue } from 'recoil';
 
 // Local Dependencies
 import styles from './QueryDisplay.module.css';
-import { queryListStatsState } from '../selectors';
+import { createdQueryState } from '../selectors';
 
 export const QueryDisplay = () => {
-  const { formattedQuery } = useRecoilValue(queryListStatsState);
+  const { formattedQuery } = useRecoilValue(createdQueryState);
   return (
     <div className={styles.displayContainer}>
       {formattedQuery

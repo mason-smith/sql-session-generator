@@ -15,10 +15,13 @@ import { formatQuery } from './utils';
  * The app still functions, so these can be ignored for now until a fix is available
  */
 
-export const queryListStatsState = selector({
-  key: 'queryListStatsState',
+export const createdQueryState = selector({
+  key: 'createdQueryState',
   get: ({ get }) => {
     const queryList = get(queryListState);
+
+    console.log('queryList', queryList);
+
     const formattedQuery = queryList
       .map((query) => {
         return `session.${query.predicate.field} ${formatQuery(

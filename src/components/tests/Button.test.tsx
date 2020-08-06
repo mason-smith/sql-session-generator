@@ -7,7 +7,6 @@ import userEvent from '@testing-library/user-event';
 // Local Dependencies
 import { Button } from 'components/Button';
 
-// @ts-ignore
 let container: HTMLElement | null = null;
 beforeEach(() => {
   // setup a DOM element as a render target

@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent, SetStateAction } from 'react';
 import { useSetRecoilState } from 'recoil';
 import cuid from 'cuid';
 
 // Local Dependencies
 import styles from './QueryRow.module.css';
-import { predicateFields, operatorFields, defaultState } from 'data';
 import { queryListState } from '../atoms';
+import { QueryType, OperatorInterface, PredicateInterface } from '../types';
+import { defaultState, predicateFields, operatorFields } from 'data';
+import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import { Select } from 'components/Select';
-import { Button } from 'components/Button';
 
 export const QueryBuilder = () => {
   const [predicate, setPredicate] = useState(defaultState.predicate);
   const [operator, setOperator] = useState(defaultState.operator);
   const [parameter, setParameter] = useState(defaultState.parameter);
   const [parameterAlt, setParameterAlt] = useState(defaultState.parameterAlt);
-
-  const setQueryListState = useSetRecoilState(queryListState);
+  const setQueryList = useSetRecoilState<QueryType[]>(queryListState);
 
   const createQuery = () => {
-    setQueryListState((oldQueryList) => [
+    setQueryList((oldQueryList) => [
       ...oldQueryList,
       {
         id: cuid(),
@@ -44,17 +44,28 @@ export const QueryBuilder = () => {
 
   return (
     <>
-      <div className={styles.row}>
-        <button className={styles.rowButton} onClick={() => resetQuery()}>
+      <form
+        onSubmit={(e: FormEvent) => {
+          e.preventDefault();
+          createQuery();
+        }}
+        className={styles.row}
+      >
+        <button
+          type="button"
+          className={styles.rowButton}
+          onClick={() => resetQuery()}
+        >
           X
         </button>
         <Select
           options={predicateFields}
           value={predicate.value}
-          onChange={(e) =>
+          onChange={(e: ChangeEvent<HTMLSelectElement>) =>
             setPredicate(
-              // @ts-ignore
-              predicateFields.find((field) => field.value === e.target.value)
+              predicateFields.find(
+                (field) => field.value === e.target.value
+              ) as SetStateAction<PredicateInterface>
             )
           }
         />
@@ -66,10 +77,11 @@ export const QueryBuilder = () => {
             return operator.type === predicate.type;
           })}
           value={operator.value}
-          onChange={(e) =>
+          onChange={(e: ChangeEvent<HTMLSelectElement>) =>
             setOperator(
-              // @ts-ignore
-              operatorFields.find((field) => field.value === e.target.value)
+              operatorFields.find(
+                (field) => field.value === e.target.value
+              ) as SetStateAction<OperatorInterface>
             )
           }
         />
@@ -78,7 +90,9 @@ export const QueryBuilder = () => {
           value={parameter}
           // type={predicate.type}
           type="text"
-          onChange={(e) => setParameter(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setParameter(e.target.value)
+          }
         />
         {operator.value === 'between' ? (
           <>
@@ -88,12 +102,14 @@ export const QueryBuilder = () => {
               value={parameterAlt}
               // type={predicate.type}
               type="text"
-              onChange={(e) => setParameterAlt(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setParameterAlt(e.target.value)
+              }
             />
           </>
         ) : null}
-      </div>
-      <Button type="submit" disabled={false} onClick={() => createQuery()}>
+      </form>
+      <Button type="button" disabled={false} onClick={() => createQuery()}>
         And
       </Button>
     </>
