@@ -15,3 +15,15 @@
   border: none;
   cursor: pointer;
 }
+
+.interstitial {
+  width: 66%;
+  background: #e0e6ed;
+  border: solid 1px #a8b5c6;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 1.75rem;
+  border-radius: 5px;
+  margin: 5px;
+}

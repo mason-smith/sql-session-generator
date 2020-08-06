@@ -7,4 +7,5 @@
   letter-spacing: 1.5px;
   display: flex;
   margin-top: 1em;
+  cursor: pointer;
 }

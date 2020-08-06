@@ -47,7 +47,9 @@ export const QueryRow: FC<FieldProps> = (props) => {
           )
         }
       />
-      {query.operator.value === 'between' ? <p>is</p> : null}
+      {query.operator.value === 'between' ? (
+        <p className={styles.interstitial}>is</p>
+      ) : null}
       <Select
         options={operatorFields.filter((operator) => {
           return operator.type === query.predicate.type;
@@ -72,7 +74,7 @@ export const QueryRow: FC<FieldProps> = (props) => {
       />
       {query.operator.value === 'between' ? (
         <>
-          <p>and</p>
+          <p className={styles.interstitial}>and</p>
           <Input
             placeholder={query.predicate.placeholder}
             value={query.parameterAlt}

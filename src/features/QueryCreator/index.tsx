@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import cuid from 'cuid';
 
@@ -13,6 +13,7 @@ import { QueryDisplay } from './components/QueryDisplay';
 export const QueryCreator = () => {
   const queryList = useRecoilValue(queryListState);
   const setQueryListState = useSetRecoilState(queryListState);
+  const [visible, setVisible] = useState<boolean>(false);
   return (
     <div className={styles.query_creator}>
       <h2>Search for Sessions</h2>
@@ -22,14 +23,20 @@ export const QueryCreator = () => {
       <QueryBuilder />
       <hr className={styles.hr} />
       <div className={styles.queryButtons}>
-        <Button type="button" onClick={() => console.log('SEARCH')}>
+        <Button type="button" onClick={() => setVisible(true)}>
           Search
         </Button>
-        <Button type="button" onClick={() => setQueryListState([])}>
+        <Button
+          type="button"
+          onClick={() => {
+            setVisible(false);
+            setQueryListState([]);
+          }}
+        >
           Reset
         </Button>
       </div>
-      <QueryDisplay />
+      {visible ? <QueryDisplay /> : null}
     </div>
   );
 };

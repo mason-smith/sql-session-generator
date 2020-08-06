@@ -58,7 +58,9 @@ export const QueryBuilder = () => {
             )
           }
         />
-        {operator.value === 'between' ? <p>is</p> : null}
+        {operator.value === 'between' ? (
+          <p className={styles.interstitial}>is</p>
+        ) : null}
         <Select
           options={operatorFields.filter((operator) => {
             return operator.type === predicate.type;
@@ -80,7 +82,7 @@ export const QueryBuilder = () => {
         />
         {operator.value === 'between' ? (
           <>
-            <p>and</p>
+            <p className={styles.interstitial}>and</p>
             <Input
               placeholder={predicate.placeholder}
               value={parameterAlt}
