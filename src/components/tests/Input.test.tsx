@@ -7,8 +7,7 @@ import userEvent from '@testing-library/user-event';
 // Local Dependencies
 import { Input } from 'components/Input';
 
-// @ts-ignore
-let container: HTMLElement = null;
+let container: HTMLElement | null = null;
 beforeEach(() => {
   // setup a DOM element as a render target
   container = document.createElement('div');
@@ -17,9 +16,8 @@ beforeEach(() => {
 
 afterEach(() => {
   // cleanup on exiting
-  unmountComponentAtNode(container);
-  container.remove();
-  // @ts-ignore
+  unmountComponentAtNode(container as HTMLElement);
+  (container as HTMLElement).remove();
   container = null;
 });
 

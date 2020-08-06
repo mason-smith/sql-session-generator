@@ -8,7 +8,7 @@ import userEvent from '@testing-library/user-event';
 import { Button } from 'components/Button';
 
 // @ts-ignore
-let container: HTMLElement = null;
+let container: HTMLElement | null = null;
 beforeEach(() => {
   // setup a DOM element as a render target
   container = document.createElement('div');
@@ -17,9 +17,8 @@ beforeEach(() => {
 
 afterEach(() => {
   // cleanup on exiting
-  unmountComponentAtNode(container);
-  container.remove();
-  // @ts-ignore
+  unmountComponentAtNode(container as HTMLElement);
+  (container as HTMLElement).remove();
   container = null;
 });
 
@@ -38,7 +37,7 @@ describe('Button component', () => {
         container
       );
     });
-    expect(container.textContent).toBe('Button Text');
+    expect((container as HTMLElement).textContent).toBe('Button Text');
   });
 
   test('handles user click', () => {
