@@ -31,6 +31,7 @@ export interface SelectProps {
 export interface ButtonProps {
   type: any;
   disabled?: boolean;
+  overrideClasses?: any;
   children: ReactNode;
   onClick?: () => void;
 }

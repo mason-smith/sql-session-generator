@@ -9,3 +9,8 @@
   margin-top: 1em;
   cursor: pointer;
 }
+
+.button:disabled {
+  background-color: #c7d0db;
+  cursor: not-allowed;
+}

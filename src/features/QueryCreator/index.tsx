@@ -25,7 +25,11 @@ export const QueryCreator = () => {
       <QueryBuilder />
       <hr className={styles.hr} />
       <div className={styles.queryButtons}>
-        <Button type="button" onClick={() => setVisible(true)}>
+        <Button
+          disabled={!queryList.length}
+          type="button"
+          onClick={() => setVisible(true)}
+        >
           Search
         </Button>
         <Button
@@ -34,6 +38,7 @@ export const QueryCreator = () => {
             setVisible(false);
             setQueryListState([]);
           }}
+          overrideClasses={styles.resetButton}
         >
           Reset
         </Button>
