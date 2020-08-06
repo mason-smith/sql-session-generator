@@ -1,4 +1,4 @@
-.select {
+select.select {
   padding: 0.5rem;
   background-color: white;
   border: 1px solid #c7d0db;
@@ -6,13 +6,15 @@
   -moz-appearance: none; /* Firefox */
   -webkit-appearance: none; /* Safari and Chrome */
   appearance: none;
-  width: 25%;
+  width: 100%;
   padding: 5px;
+  margin: 5px;
   font-size: 14px;
   line-height: 1;
   border-radius: 5px;
   height: 2rem;
   background: url('http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png')
     no-repeat right;
-  background-position-x: 11.75rem;
+  background-position-x: calc(100% - 15px);
+  cursor: pointer;
 }

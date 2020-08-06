@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ChangeEvent } from 'react';
 import { useRecoilState } from 'recoil';
 
 // Local Dependencies
@@ -66,7 +66,9 @@ export const QueryRow: FC<FieldProps> = (props) => {
         value={query.parameter}
         // type={query.predicate.type}
         type="string"
-        onChange={(e) => editField(e.target.value, 'parameter')}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          editField(e.target.value, 'parameter')
+        }
       />
       {query.operator.value === 'between' ? (
         <>
@@ -76,7 +78,9 @@ export const QueryRow: FC<FieldProps> = (props) => {
             value={query.parameterAlt}
             // type={predicate.type}
             type="string"
-            onChange={(e) => editField(e.target.value, 'parameterAlt')}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              editField(e.target.value, 'parameterAlt')
+            }
           />
         </>
       ) : null}

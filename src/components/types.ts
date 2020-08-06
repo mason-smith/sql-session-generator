@@ -31,5 +31,5 @@ export interface ButtonProps {
   type: any;
   disabled?: boolean;
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
 }

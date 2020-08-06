@@ -1,6 +1,8 @@
 export interface SelectInterface {
   value: string;
   type: string;
+  field?: string;
+  symbol?: string;
   placeholder?: string;
 }
 

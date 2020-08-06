@@ -10,3 +10,9 @@
   height: 1px;
   background: #e0e6ed;
 }
+
+.queryButtons {
+  display: flex;
+  justify-content: space-between;
+  width: 25%;
+}
