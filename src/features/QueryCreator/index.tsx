@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
 // Local Dependencies
 import styles from './QueryCreator.module.css';
 import { queryListState } from './atoms';
@@ -29,6 +31,7 @@ export const QueryCreator = () => {
           disabled={!queryList.length}
           type="button"
           onClick={() => setVisible(true)}
+          icon={faSearch}
         >
           Search
         </Button>

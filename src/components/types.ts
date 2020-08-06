@@ -1,9 +1,5 @@
-import {
-  ChangeEvent,
-  ReactNode,
-  DetailedHTMLProps,
-  ButtonHTMLAttributes,
-} from 'react';
+import { ChangeEvent, ReactNode } from 'react';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 /**
  * Input
@@ -33,5 +29,6 @@ export interface ButtonProps {
   disabled?: boolean;
   overrideClasses?: any;
   children: ReactNode;
+  icon?: IconProp;
   onClick?: () => void;
 }
